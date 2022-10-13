@@ -54,6 +54,11 @@ export const addNurse = async (
     const uploadResponse = await cloudinary.uploader.upload(
       nurseDetails.photograph!,
       {
+        resource_type: "image",
+        use_filename: true,
+        width: 500,
+        height: 500,
+        crop: "limit",
         upload_preset: "cloudinary-test",
       }
     );
@@ -61,8 +66,6 @@ export const addNurse = async (
     const url = uploadResponse.url;
 
     fs.unlinkSync(nurseDetails.photograph!);
-
-    console.log(nurseDetails);
 
     const nurse = await NurseModel.addNurse({
       ...nurseDetails,
@@ -111,6 +114,7 @@ export const updateNurse = async (
     } else {
       delete nurseDetails.photograph;
     }
+
     const nurse = await NurseModel.updateNurse(nurseDetails);
     return {
       data: nurse,

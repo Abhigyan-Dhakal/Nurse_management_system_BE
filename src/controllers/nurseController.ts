@@ -143,6 +143,7 @@ export const updateNurse = (
     contact,
     email,
   } = req.body;
+
   nurseService
     .updateNurse({
       nurse_id: +nurseId,
