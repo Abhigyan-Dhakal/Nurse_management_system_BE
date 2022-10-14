@@ -4,6 +4,6 @@ import KnexConfig from "./knexfile";
 // @ts-ignore
 import * as knexStringCase from "knex-stringcase";
 
-const knex = Knex(KnexConfig.development);
+const knex = Knex(KnexConfig.production);
 
 export default knex;
