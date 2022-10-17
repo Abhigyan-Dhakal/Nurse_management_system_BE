@@ -22,14 +22,10 @@ class UserModel {
    * @returns
    */
   public static async getUserByEmail(email: string): Promise<User> {
-    console.log("user");
-
     const user = await db(UserModel.table)
       .where({ email: email })
       .select()
       .first();
-
-    console.log(user);
 
     return user;
   }

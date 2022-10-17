@@ -1,19 +1,24 @@
+import fs from "fs";
 import { Request } from "express";
 import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: function (req: Request, file, cb: Function) {
+    if (!fs.existsSync(`src/assets/uploads`)) {
+      fs.mkdirSync(`src/assets/uploads`, { recursive: true });
+    }
+
     if (file) {
       cb(null, `src/assets/uploads`);
     } else {
-      cb("multer error");
+      cb(new Error("Multer Error!"), "");
     }
   },
   filename: function (req, file, cb: Function) {
     if (file) {
       cb(null, Date.now() + "_" + file.originalname);
     } else {
-      cb("multer error");
+      cb(new Error("Multer Error!"), "");
     }
   },
 });
