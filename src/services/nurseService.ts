@@ -65,6 +65,7 @@ export const addNurse = async (
 
     const nurse = await NurseModel.addNurse({
       ...nurseDetails,
+      photograph: "test",
       // photograph: url,
     });
 
