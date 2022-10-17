@@ -100,6 +100,7 @@ export const updateNurse = async (
         nurseDetails.photograph!,
         {
           resource_type: "image",
+          use_filename: true,
           upload_preset: "cloudinary-test",
           width: 500,
           height: 500,
