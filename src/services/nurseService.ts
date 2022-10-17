@@ -45,28 +45,26 @@ export const getNurse = async (
  * @returns
  */
 export const addNurse = async (
-  nurseDetails: NurseToInsert
-  // photograph: string
+  nurseDetails: NurseToInsert,
+  photograph: string
 ): Promise<Success<NurseDetails>> => {
   try {
-    // if (!fs.existsSync(photograph)) {
-    //   throw new Error("File not found!");
-    // }
-    // const uploadResponse = await cloudinary.uploader.upload(photograph, {
-    //   resource_type: "image",
-    //   use_filename: true,
-    //   width: 500,
-    //   height: 500,
-    //   crop: "limit",
-    //   upload_preset: "cloudinary-test",
-    // });
+    if (!fs.existsSync(photograph)) {
+      throw new Error("File not found!");
+    }
 
-    // const url = uploadResponse.url;
+    const uploadResponse = await cloudinary.uploader.upload(photograph, {
+      resource_type: "image",
+      use_filename: true,
+      width: 500,
+      height: 500,
+      crop: "limit",
+      upload_preset: "cloudinary-test",
+    });
 
     const nurse = await NurseModel.addNurse({
       ...nurseDetails,
-      photograph: "test",
-      // photograph: url,
+      photograph: uploadResponse.url,
     });
 
     return {
@@ -75,12 +73,11 @@ export const addNurse = async (
     };
   } catch (error) {
     console.log("error:::", error);
-    // fs.unlinkSync(photograph);
     return {
       message: "Cannot add nurse details!",
     };
   } finally {
-    // fs.unlinkSync(photograph);
+    fs.unlinkSync(photograph);
   }
 };
 

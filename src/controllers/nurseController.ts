@@ -61,7 +61,7 @@ export const addNurse = (
   res: Response,
   next: NextFunction
 ) => {
-  // const photograph = req.file?.path as string;
+  const photograph = req.file?.path as string;
   const currentUser = req.authUser;
 
   const {
@@ -87,8 +87,8 @@ export const addNurse = (
         address,
         contact,
         email,
-      }
-      // photograph
+      },
+      photograph
     )
     .then((data) => {
       res.json(data);
