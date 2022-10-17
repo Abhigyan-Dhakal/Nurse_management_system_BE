@@ -74,10 +74,12 @@ export const addNurse = async (
     };
   } catch (error) {
     console.log("error:::", error);
-    fs.unlinkSync(nurseDetails.photograph!);
+    fs.unlinkSync(photograph);
     return {
       message: "Cannot add nurse details!",
     };
+  } finally {
+    fs.unlinkSync(photograph);
   }
 };
 
