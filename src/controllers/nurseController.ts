@@ -61,7 +61,7 @@ export const addNurse = (
   res: Response,
   next: NextFunction
 ) => {
-  const photograph = req.file?.path + "";
+  const photograph = req.file?.path as string;
   const currentUser = req.authUser;
 
   const {
@@ -76,18 +76,20 @@ export const addNurse = (
   } = req.body;
 
   nurseService
-    .addNurse({
-      name,
-      photograph,
-      user_id: currentUser,
-      isRoundingManager,
-      workingDays,
-      dutyStartTime,
-      dutyEndTime,
-      address,
-      contact,
-      email,
-    })
+    .addNurse(
+      {
+        name,
+        user_id: currentUser,
+        isRoundingManager,
+        workingDays,
+        dutyStartTime,
+        dutyEndTime,
+        address,
+        contact,
+        email,
+      },
+      photograph
+    )
     .then((data) => {
       res.json(data);
     })

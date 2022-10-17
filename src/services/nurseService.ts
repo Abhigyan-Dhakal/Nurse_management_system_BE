@@ -45,27 +45,25 @@ export const getNurse = async (
  * @returns
  */
 export const addNurse = async (
-  nurseDetails: NurseToInsert
+  nurseDetails: NurseToInsert,
+  photograph: string
 ): Promise<Success<NurseDetails>> => {
   try {
-    if (!fs.existsSync(nurseDetails.photograph!)) {
+    if (!fs.existsSync(photograph)) {
       throw new Error("File not found!");
     }
-    const uploadResponse = await cloudinary.uploader.upload(
-      nurseDetails.photograph!,
-      {
-        resource_type: "image",
-        use_filename: true,
-        width: 500,
-        height: 500,
-        crop: "limit",
-        upload_preset: "cloudinary-test",
-      }
-    );
+    const uploadResponse = await cloudinary.uploader.upload(photograph, {
+      resource_type: "image",
+      use_filename: true,
+      width: 500,
+      height: 500,
+      crop: "limit",
+      upload_preset: "cloudinary-test",
+    });
 
     const url = uploadResponse.url;
 
-    fs.unlinkSync(nurseDetails.photograph!);
+    fs.unlinkSync(photograph);
 
     const nurse = await NurseModel.addNurse({
       ...nurseDetails,
