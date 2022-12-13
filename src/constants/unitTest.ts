@@ -29,6 +29,20 @@ export const nursesResponseData = {
   contact: "1234567890",
 };
 
+export const nursesUpdateData = {
+  nurse_id: 1,
+  name: "Nurse",
+  photograph: "photographUrl",
+  email: "nursetest@gmail.com",
+  isRoundingManager: true,
+  workingDays: 24,
+  dutyStartTime: "startTime",
+  dutyEndTime: "endTime",
+  user_id: 1,
+  address: "address",
+  contact: "1234567890",
+};
+
 export const nurseToInsert = {
   name: "Nurse",
   photograph: "photographUrl",

@@ -3,8 +3,13 @@ const {
   getNurse,
   removeNurse,
   addNurse,
+  updateNurse,
 } = require("../services/nurseService");
-const { nursesResponseData, nurseToInsert } = require("../constants/unitTest");
+const {
+  nursesResponseData,
+  nurseToInsert,
+  nursesUpdateData,
+} = require("../constants/unitTest");
 
 jest.mock("../models/NurseModel.ts");
 
@@ -40,21 +45,34 @@ describe("Nurse CRUD operations", () => {
     expect(output).toEqual(expectedOutput);
   });
 
-  // test("Should add a new nurse", async () => {
-  //   const input = {
-  //     nurseToInsert,
-  //     photograph: "photographPath",
-  //   };
+  test("Should add a new nurse", async () => {
+    const input = {
+      nurseToInsert,
+      photograph: "photographPath",
+    };
 
-  //   const output = await addNurse(input);
+    const output = await addNurse(input);
 
-  //   const expectedOutput = {
-  //     data: nursesResponseData,
-  //     message: "Nurse details added successfully!",
-  //   };
+    const expectedOutput = {
+      data: nursesResponseData,
+      message: "Nurse details added successfully!",
+    };
 
-  //   expect(output).toEqual(expectedOutput);
-  // });
+    expect(output).toEqual(expectedOutput);
+  });
+
+  test("Should update an existing nurse details", async () => {
+    const input = nursesUpdateData;
+
+    const output = await updateNurse(input);
+
+    const expectedOutput = {
+      data: nursesResponseData,
+      message: "Nurse details updated successfully!",
+    };
+
+    expect(output).toEqual(expectedOutput);
+  });
 
   test("Should remove a specific nurse details", async () => {
     const input = {

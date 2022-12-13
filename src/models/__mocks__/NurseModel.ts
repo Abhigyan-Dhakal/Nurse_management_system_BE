@@ -1,6 +1,7 @@
 const {
   nurseToInsert,
   nursesResponseData,
+  nursesUpdateData,
 } = require("../../constants/unitTest");
 
 module.exports = {
@@ -18,5 +19,8 @@ module.exports = {
   },
   addNurse: (nurseToInsert: any) => {
     return nursesResponseData;
+  },
+  update: (nursesUpdateData: any) => {
+    return [nursesResponseData];
   },
 };
