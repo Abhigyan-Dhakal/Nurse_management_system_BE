@@ -6,22 +6,24 @@ beforeAll(() => {
   process.env.REFRESH_TOKEN_SECRET = "refreshtokentest";
 });
 
-test("Should generate a new token", async () => {
-  const input = {
-    refreshToken: "refreshToken",
-    userId: 1,
-  };
+describe("Generate tokens", () => {
+  test("Should generate a new token", async () => {
+    const input = {
+      refreshToken: "refreshToken",
+      userId: 1,
+    };
 
-  const output = await generateToken(input.refreshToken, input.userId);
+    const output = await generateToken(input.refreshToken, input.userId);
 
-  const expectedOutput = {
-    data: {
-      access: "randomString",
-      refresh: "randomString",
-      user_id: userResponseData.user_id,
-    },
-    message: "Token Regenerated!",
-  };
+    const expectedOutput = {
+      data: {
+        access: "randomString",
+        refresh: "randomString",
+        user_id: userResponseData.user_id,
+      },
+      message: "Token Regenerated!",
+    };
 
-  expect(output).toEqual(expectedOutput);
+    expect(output).toEqual(expectedOutput);
+  });
 });

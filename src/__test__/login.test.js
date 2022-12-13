@@ -8,22 +8,24 @@ beforeAll(() => {
   process.env.REFRESH_TOKEN_SECRET = "refreshtokentest";
 });
 
-test("Should log in the user", async () => {
-  const input = {
-    email: "test@gmail.com",
-    password: "test123",
-  };
+describe("Login user", () => {
+  test("Should log in the user", async () => {
+    const input = {
+      email: "test@gmail.com",
+      password: "test123",
+    };
 
-  const output = await login(input);
+    const output = await login(input);
 
-  const expectedOutput = {
-    data: {
-      access: "randomString",
-      refresh: "randomString",
-      user_id: userResponseData.user_id,
-    },
-    message: "User Logged In!",
-  };
+    const expectedOutput = {
+      data: {
+        access: "randomString",
+        refresh: "randomString",
+        user_id: userResponseData.user_id,
+      },
+      message: "User Logged In!",
+    };
 
-  expect(output).toEqual(expectedOutput);
+    expect(output).toEqual(expectedOutput);
+  });
 });
